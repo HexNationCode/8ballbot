@@ -17,13 +17,14 @@ public class EightBall implements MessageCreateListener {
     public void onMessageCreate(MessageCreateEvent event) {
         Message msg = event.getMessage();
         TextChannel channel = event.getChannel();
-        if (channel.getIdAsString().equals("883976254175469568"))
-        {
+       /* if (channel.getIdAsString().equals("883976254175469568"))
+        {*/
             try {
                 if (msg.getMentionedUsers().get(0).getName().equals("8ballbot"))
                 {
                     String trimmed = msg.getContent().substring(22);
                     ArrayList<String> responses = ReadFromFile.returnResponses(new File("Z://ftp/responses.txt"));
+
 
                     if (trimmed.isEmpty())
                         channel.sendMessage("Please ask me a question if you're going to @ me!");
@@ -31,11 +32,15 @@ public class EightBall implements MessageCreateListener {
                         Random random = new Random();
                         int r_Num = random.nextInt(responses.size());
 
-                        channel.sendMessage(responses.get(r_Num));
+                        channel.sendMessage(getMentioned(event.getMessageAuthor().asUser().get()) + " " + responses.get(r_Num));
                     }
 
                 }
             } catch (IndexOutOfBoundsException | IOException ignored){}
-        }
+        //}
+    }
+
+    static String getMentioned(User user) {
+        return "<@!" + user.getIdAsString() + ">";
     }
 }
