@@ -1,5 +1,6 @@
 package com.spoopy.events;
 
+import com.spoopy.Main;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.user.User;
@@ -9,6 +10,7 @@ import com.spoopy.classes.ReadFromFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,9 +25,10 @@ public class EightBall implements MessageCreateListener {
                 if (msg.getMentionedUsers().get(0).getName().equals("8ballbot"))
                 {
                     String trimmed = msg.getContent().substring(22);
-                    ArrayList<String> responses = ReadFromFile.returnResponses(new File("Z://ftp/responses.txt"));
-
-
+                    //Enable this for release
+                    ArrayList<String> responses = ReadFromFile.returnResponses(Main.class.getResourceAsStream("/com/spoopy/resources/responses.txt"));
+                    //Enable this for IDE testing
+                    //ArrayList<String> responses = ReadFromFile.returnResponses(new File("Z://ftp/responses.txt"));
                     if (trimmed.isEmpty())
                         channel.sendMessage("Please ask me a question if you're going to @ me!");
                     else {
@@ -36,7 +39,9 @@ public class EightBall implements MessageCreateListener {
                     }
 
                 }
-            } catch (IndexOutOfBoundsException | IOException ignored){}
+            } catch (Exception e){
+                e.getStackTrace();
+            }
         //}
     }
 

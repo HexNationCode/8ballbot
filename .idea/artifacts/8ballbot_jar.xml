@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="8ballbot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/8ballbot_jar</output-path>
+    <root id="archive" name="8ballbot.jar">
+      <element id="module-output" name="8ballbot" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Development/apis/javacord-3.3.2-shaded.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
